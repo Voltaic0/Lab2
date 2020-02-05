@@ -12,7 +12,7 @@ OUTDIR=$(APPROOT)/../bin
 #SRCS=userprog.c
 
 # List of os header files
-#HDRS=usertraps.h
+#HDRS=usertraps.h synch.h
 
 # Name of final executable
 #EXEC=userprog.dlx.obj

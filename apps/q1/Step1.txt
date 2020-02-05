@@ -1,0 +1,5 @@
+1. There are 32 semaphores in DLXOS.
+2. There are 64 locks available.
+3. SemCreate is called and given a count number. It then initializes a semaphore and returns its pointer.
+4. Sem_wait inserts the semaphore into a queue for waiting, assuming there is room in the queue and that the input is a semaphore. Sem_signal wakes up the semaphore from the queue and then removes it from the queue.
+5. A handle is how you access a semaphore in dlxos. It allows you to access what state it is in and how it is being used.
