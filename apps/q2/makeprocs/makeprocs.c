@@ -13,7 +13,6 @@ void main (int argc, char *argv[])
   char h_mem_str[10];             // Used as command-line argument to pass mem_handle to new processes
   char s_procs_completed_str[10]; // Used as command-line argument to pass page_mapped handle to new processes
   buffer* Buffer;
-  lock_t l;
 
   if (argc != 2) {
     Printf("Usage: "); Printf(argv[0]); Printf(" <number of processes to create>\n");
@@ -41,6 +40,7 @@ void main (int argc, char *argv[])
   // Put some values in the shared memory, to be read by other processes
   Buffer->head = 0;
   Buffer->tail = 0;
+  Buffer->TheLock = lock_create();
 
   // Create semaphore to not exit this process until all other processes 
   // have signalled that they are complete.  To do this, we will initialize
@@ -62,11 +62,21 @@ void main (int argc, char *argv[])
   // Now we can create the processes.  Note that you MUST end your call to
   // process_create with a NULL argument so that the operating system
   // knows how many arguments you are sending.
-  l = lock_create();
+  //ADDING
+  //l = lock_create();
   for(i=0; i<numprocs; i++) {
-    process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, l);
-    process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, l);
-    Printf("Process %d created\n", i);
+	if(i==0){
+		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "1", NULL);
+		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "1", NULL);
+	}else if(i == 2){
+		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "2", NULL);
+		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "2", NULL);
+	}else{
+		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "3", NULL);
+		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "3", NULL);
+	}
+    
+    //Printf("Producer and Consumer %d created\n", i);
   }
 
   // And finally, wait until all spawned processes have finished.
