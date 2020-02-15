@@ -1,0 +1,2 @@
+work/equation1.o: equation1.c ../../../include/lab2-api.h \
+ ../../../include/usertraps.h ../../../include/misc.h
