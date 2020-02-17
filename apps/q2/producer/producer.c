@@ -9,7 +9,7 @@ void main (int argc, char *argv[])
   buffer *Buffer;        // Used to access missile codes in shared memory page
   uint32 h_mem;            // Handle to the shared memory page
   sem_t s_procs_completed; // Semaphore to signal the original process that we're done
-  //lock_t TheLock;
+  int TheLock;
   char* phrase = "Hello World";
   char inserted[1];
   int i;

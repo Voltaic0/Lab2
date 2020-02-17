@@ -1,2 +1,0 @@
-work/h2oinject.o: h2oinject.c ../../../include/lab2-api.h \
- ../../../include/usertraps.h ../../../include/misc.h

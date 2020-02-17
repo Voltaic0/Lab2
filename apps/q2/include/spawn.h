@@ -5,6 +5,7 @@ typedef struct buffer {
   int tail;
   int head;
   char chars[10];
+  lock_t TheLock;
 } buffer;
 
 #define FILENAME_TO_RUN "producer.dlx.obj"

@@ -1,6 +1,7 @@
 #include "lab2-api.h"
 #include "usertraps.h"
 #include "misc.h"
+//#include "stdio.h"
 
 #include "spawn.h"
 
@@ -13,6 +14,7 @@ void main (int argc, char *argv[])
   char h_mem_str[10];             // Used as command-line argument to pass mem_handle to new processes
   char s_procs_completed_str[10]; // Used as command-line argument to pass page_mapped handle to new processes
   buffer* Buffer;
+  char test[2];
 
   if (argc != 2) {
     Printf("Usage: "); Printf(argv[0]); Printf(" <number of processes to create>\n");
@@ -64,18 +66,13 @@ void main (int argc, char *argv[])
   // knows how many arguments you are sending.
   //ADDING
   //l = lock_create();
+  test[0] = '1';
+  test[1] = '\0';
   for(i=0; i<numprocs; i++) {
-	if(i==0){
-		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "1", NULL);
-		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "1", NULL);
-	}else if(i == 2){
-		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "2", NULL);
-		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "2", NULL);
-	}else{
-		process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, "3", NULL);
-		process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, "3", NULL);
-	}
-    
+	
+	process_create(FILENAME_TO_RUN, h_mem_str, s_procs_completed_str, test, NULL); // pro
+	process_create(FILENAME_TO_RUNTOO, h_mem_str, s_procs_completed_str, test, NULL);
+	test[0]++;
     //Printf("Producer and Consumer %d created\n", i);
   }
 
